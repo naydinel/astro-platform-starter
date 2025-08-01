@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Countdown to Sales</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+      background-color: #f5f5f5;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 40px;
+    }
+
+    .countdown {
+      font-size: 2em;
+      background: #fff;
+      display: inline-block;
+      padding: 20px 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    .time-section {
+      display: inline-block;
+      margin: 0 15px;
+    }
+
+    .time-section span {
+      display: block;
+    }
+
+    .label {
+      font-size: 0.5em;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Countdown to Lena & Nuri Meeting</h1>
+
+  <div class="countdown" id="countdown">
+    <div class="time-section">
+      <span id="days">00</span>
+      <span class="label">Days</span>
+    </div>
+    <div class="time-section">
+      <span id="hours">00</span>
+      <span class="label">Hours</span>
+    </div>
+    <div class="time-section">
+      <span id="minutes">00</span>
+      <span class="label">Minutes</span>
+    </div>
+    <div class="time-section">
+      <span id="seconds">00</span>
+      <span class="label">Seconds</span>
+    </div>
+  </div>
+
+  <script>
+    // Target: August 1, 2025 at 5:00 PM PDT = August 2, 2025 at 00:00:00 UTC
+    const targetDate = new Date(Date.UTC(2025, 7, 2, 0, 0, 0)).getTime();
+
+    function countdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance <= 0) {
+        document.getElementById("countdown").innerHTML = "Sales Started!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = String(days).padStart(2, '0');
+      document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+      document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+      document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+    }
+
+    setInterval(countdown, 1000);
+    countdown();
+  </script>
+
+</body>
+</html>
